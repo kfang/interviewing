@@ -1,6 +1,11 @@
 
-trait Session {
+/**
+  * WARNING: this code review adapted from typescript.
+  *   functions can return null, and there are no Options.
+  */
 
+trait Session {
+  // this is just a stub, don't worry, its an actual session.
 }
 
 trait User {
