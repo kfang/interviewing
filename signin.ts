@@ -33,13 +33,15 @@ namespace RouteImpls {
     const userService: UserService;
 
     /**
-     * Logs a user in
+     * POST "/auth/signin"
      * 
+     * Logs a user in
      * Requirements:
      * - password must be correct
      * - can try up to 3 times
      * - updates lastloginAt date
      * - returns a new session
+     * 
      * @param email 
      * @param password 
      */
@@ -48,7 +50,7 @@ namespace RouteImpls {
         user = user.setNumLoginAttempts(user.numLoginAttempts + 1);
 
         if (user.numLoginAttempts >= 3) {
-            throw new Error("no more login attempts");
+            throw new HttpError(401, "no more login attempts");
         }
 
         if (user.checkPassword(password)) {
@@ -57,6 +59,7 @@ namespace RouteImpls {
             return user.session;
         }
 
-        throw new Error("invalid email or password");
+        throw new HttpError(400, "invalid email or password");
     }
+
 }
